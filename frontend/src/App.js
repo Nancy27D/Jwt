@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
@@ -8,7 +9,8 @@ import Signup from './components/Signup';
 import Welcome from './components/Welcome';
 
 function App() {
-
+  const isLoggedIn = useSelector(state => state.isLoggedIn)
+  console.log(isLoggedIn, "isLoggedIn")
   return (
     <React.Fragment>
       <header>
@@ -16,9 +18,9 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/login" element={<Login/>} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/user" element={<Welcome/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          {isLoggedIn && <Route path="/user" element={<Welcome />} />}
         </Routes>
       </main>
 

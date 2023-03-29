@@ -3,12 +3,15 @@ import { Box } from '@mui/system'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { authActions } from '../store'
 
 const Login = () => {
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
 })
+const dispatch=useDispatch()
 const navigate = useNavigate()
 
 const handleChange = (e) => {
@@ -33,7 +36,7 @@ const sendReqLogin = async () => {
 }
 const handleSubmit = (e) => {
     e.preventDefault()
-    sendReqLogin()
+    sendReqLogin().then(()=>dispatch(authActions.login()))
 }
 
 return (
